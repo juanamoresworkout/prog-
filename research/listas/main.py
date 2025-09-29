@@ -1,6 +1,8 @@
 print("Hola mundo")
-def contar_palabras(lista):
-    print(lista)
+print("Hola mundo")
 
-mi_lista = [1,2,3,4]
-contar_palabras(mi_lista)
+def contar_palabras(lista):
+    return len(lista)
+
+mi_lista = [1, 2, 3, 4]
+print(contar_palabras(mi_lista))
