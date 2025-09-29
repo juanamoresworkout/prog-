@@ -17,13 +17,18 @@ def devolver_mayor(lista) -> int:
 #Una funcion que me devuelva la posicion del mayor elemento
 
 def devolver_maxima(lista : List[int]) -> int : 
+    if len(lista) == 0 :
+        return -9999
     i = 1
-    contador_posicion = 0 
+    index = 0 
     buscar_mayor = lista[0]
+    
     while i < len(lista) : 
         if lista[i] > buscar_mayor : 
             buscar_mayor = lista [i]
-            contador_posicion = i 
+            index = i 
         i +=1 
         
-    return  contador_posicion 
+    return  index 
+
+#Hacer una funcion que devuelva la media de los elemento de la lista
