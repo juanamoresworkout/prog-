@@ -32,3 +32,14 @@ def devolver_maxima(lista : List[int]) -> int :
     return  index 
 
 #Hacer una funcion que devuelva la media de los elemento de la lista
+def devolver_media(lista) -> float :
+    i = 0 
+    sumatory = 0 
+    while i < len(lista):
+        sumatory = sumatory + lista[i] 
+        i += 1
+    resultado : float = sumatory/ 2 
+    return resultado
+
+
+

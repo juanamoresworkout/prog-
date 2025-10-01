@@ -1,5 +1,5 @@
 #import list
-from list import contar_palabras,devolver_mayor,devolver_maxima
+from list import contar_palabras,devolver_mayor,devolver_maxima,devolver_media
 
 
 
@@ -10,3 +10,5 @@ print(devolver_mayor(mi_lista))
 #Una funcion que devuelva el numero más grande 
 
 print(devolver_maxima(mi_lista))
+
+print(devolver_media(mi_lista))
