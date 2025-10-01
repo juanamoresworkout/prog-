@@ -1,5 +1,5 @@
 #import list
-from list import contar_palabras,devolver_mayor,devolver_maxima,devolver_media
+from list import contar_palabras,devolver_mayor,devolver_maxima,devolver_media,devolver_inversa,posicion_fibonacci
 
 
 
@@ -9,6 +9,10 @@ print(contar_palabras(mi_lista))
 print(devolver_mayor(mi_lista))
 #Una funcion que devuelva el numero más grande 
 
-print(devolver_maxima(mi_lista))
+#print(devolver_maxima(mi_lista))
 
-print(devolver_media(mi_lista))
+#print(devolver_media(mi_lista))
+
+#print(devolver_inversa(mi_lista))
+
+print(posicion_fibonacci(3))

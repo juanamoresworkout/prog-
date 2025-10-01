@@ -41,5 +41,28 @@ def devolver_media(lista) -> float :
     resultado : float = sumatory/ 2 
     return resultado
 
+def devolver_inversa(lista) : 
+    if len(lista) == 0 :
+        return []
+    i = len(lista) - 1 
+    inversa = []
+    while i >= 0 :
+        inversa.append(lista[i])
+        i -=1
+    return inversa 
 
-
+#Devolver index de la posicion del numero que yo le pase de la lista de fibonacci del 
+def posicion_fibonacci (number: int ) -> int :
+    a = 0 
+    b = 1 
+    i = 0 
+    if number == 0:
+        return a
+    elif number == 1:
+        return b
+    while i < number -1 :
+        c = a + b 
+        a = b 
+        b = c 
+        i += 1 
+    return b 
