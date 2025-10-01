@@ -66,3 +66,43 @@ def posicion_fibonacci (number: int ) -> int :
         b = c 
         i += 1 
     return b 
+
+#FUNCIONES RECURSIVAS INVESTIGAR 
+def get_sumatory(n):
+    if n <= 0:
+        return 0 
+    return n + get_sumatory(n-1)
+print(get_sumatory(4))
+
+
+def sacar_minimo(lista) :
+    minimo = lista[0]
+    for num in lista:
+        if num < minimo :
+            minimo = num 
+    return minimo 
+def sacar_maximo(lista):
+    maximo = lista[0]
+    for num in lista: 
+        if num > maximo:
+            maximo = num 
+    return maximo 
+def sacar_media(lista) -> float:
+    resultado = (sacar_minimo(lista) + sacar_maximo(lista))/ 2 
+    return resultado 
+
+def sacar_media2(lista) -> float: 
+    minimo = sacar_minimo(lista)
+    maximo = sacar_maximo(lista)
+
+    resultado = (maximo + minimo)/2
+    return resultado 
+
+
+# Sacar tabla de multiplicacion por pantalla 
+def devolver_tabla(n: int ) -> int : 
+    for num in range(1,11) :
+        numero = n * num 
+        devolver = print(f"{n} x {num} = {numero}" )
+    return devolver
+            

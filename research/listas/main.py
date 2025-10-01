@@ -1,7 +1,5 @@
 #import list
-from list import contar_palabras,devolver_mayor,devolver_maxima,devolver_media,devolver_inversa,posicion_fibonacci
-
-
+from list import *
 
 mi_lista = [1, 2, 3, 4, 6]
 print(contar_palabras(mi_lista))
@@ -16,3 +14,5 @@ print(devolver_mayor(mi_lista))
 #print(devolver_inversa(mi_lista))
 
 print(posicion_fibonacci(3))
+devolver_tabla(7)
+
