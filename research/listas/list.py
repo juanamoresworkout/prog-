@@ -72,7 +72,7 @@ def get_sumatory(n):
     if n <= 0:
         return 0 
     return n + get_sumatory(n-1)
-print(get_sumatory(4))
+#print(get_sumatory(4))
 
 
 def sacar_minimo(lista) :
@@ -98,12 +98,20 @@ def sacar_media2(lista) -> float:
     resultado = (maximo + minimo)/2
     return resultado 
 
-#Pasamos una lista,
-def devolver_numeros_mayores(lista: List[int | float], threshold: int | float) -> int : 
+#Pasamos una lista, donde me de el numero 
+def devolver_numeros_mayores(lista: List[int | float], threshold: int | float,
+        incluir_mayores: bool,
+        incluir_iguales: bool,
+        inclur_menores: bool) -> int : 
+    
     contador = 0 
     for valor in lista :
-        if   valor > threshold :
+        if incluir_mayores and valor > threshold :
+            contador += 1 
+        if incluir_iguales and valor == threshold :     
+            contador += 1 
+        if inclur_menores and valor < threshold : 
             contador += 1 
     return contador 
-mi_lista = [1,2,3,4,5]
-print(devolver_numeros_mayores(mi_lista,4))
+
+

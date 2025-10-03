@@ -1,4 +1,5 @@
 # Sacar tabla de multiplicacion por pantalla 
+
 def devolver_tabla(n: int ) -> int : 
     for num in range(1,11) :
         numero = n * num 
@@ -14,3 +15,4 @@ def devolver_productorio(n: int) -> int :
     return multiplicacion
 
 print(devolver_productorio(5))
+
