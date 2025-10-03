@@ -6,8 +6,11 @@ def devolver_tabla(n: int ) -> int :
     return devolver
 
 def devolver_productorio(n: int) -> int :
-    i = 0 
     multiplicacion = 1
-    for i in range(1, n + 1 ) :
-        multiplicacion *= n 
+    if n <= 0:
+        return 0 
+    for i in range(1, n + 1) :
+        multiplicacion *= i 
     return multiplicacion
+
+print(devolver_productorio(5))
