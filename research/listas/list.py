@@ -98,4 +98,12 @@ def sacar_media2(lista) -> float:
     resultado = (maximo + minimo)/2
     return resultado 
 
-
+#Pasamos una lista,
+def devolver_numeros_mayores(lista: List[int | float], threshold: int | float) -> int : 
+    contador = 0 
+    for valor in lista :
+        if   valor > threshold :
+            contador += 1 
+    return contador 
+mi_lista = [1,2,3,4,5]
+print(devolver_numeros_mayores(mi_lista,4))
