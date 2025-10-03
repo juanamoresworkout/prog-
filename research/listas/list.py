@@ -99,10 +99,3 @@ def sacar_media2(lista) -> float:
     return resultado 
 
 
-# Sacar tabla de multiplicacion por pantalla 
-def devolver_tabla(n: int ) -> int : 
-    for num in range(1,11) :
-        numero = n * num 
-        devolver = print(f"{n} x {num} = {numero}" )
-    return devolver
-            

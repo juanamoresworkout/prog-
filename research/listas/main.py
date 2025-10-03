@@ -14,5 +14,4 @@ print(devolver_mayor(mi_lista))
 #print(devolver_inversa(mi_lista))
 
 print(posicion_fibonacci(3))
-devolver_tabla(7)
 
