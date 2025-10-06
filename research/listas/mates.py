@@ -3,8 +3,9 @@
 def devolver_tabla(n: int ) -> int : 
     for num in range(1,11) :
         numero = n * num 
-        devolver = print(f"{n} x {num} = {numero}" )
-    return devolver
+        print(f"{n} x {num} = {numero}" )
+    return 
+devolver_tabla(1)
 
 def devolver_productorio(n: int) -> int :
     multiplicacion = 1

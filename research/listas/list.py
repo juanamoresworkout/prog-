@@ -114,4 +114,17 @@ def devolver_numeros_mayores(lista: List[int | float], threshold: int | float,
             contador += 1 
     return contador 
 
+#Ordenar la lista cambiando posiciones 
+def cambiar_posiciones (lista: List[int]) :
+    n = len(lista)
 
+    for posicion in range(n) :
+        for segunda_posicion in range(posicion + 1, n):
+            if lista[posicion] > lista[segunda_posicion]:
+                auxiliar = lista[posicion]
+                lista[posicion] = lista[segunda_posicion]
+                lista[segunda_posicion] = auxiliar
+    
+
+
+  

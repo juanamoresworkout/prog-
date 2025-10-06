@@ -1,6 +1,5 @@
 #import list
 from list import *
-from mates import *
 #mi_lista = [1, 2, 3, 4, 6]
 #print(contar_palabras(mi_lista))
 
@@ -16,6 +15,7 @@ from mates import *
 #print(posicion_fibonacci(3))
 #mi_lista = [-2,-5,10,3]
 #print(devolver_numeros_mayores(mi_lista,3,False,True,True))
-
+lista = [4,6,2,6,7]
+print(cambiar_posiciones(lista))
 
 
