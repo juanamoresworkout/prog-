@@ -124,7 +124,38 @@ def cambiar_posiciones (lista: List[int]) :
                 auxiliar = lista[posicion]
                 lista[posicion] = lista[segunda_posicion]
                 lista[segunda_posicion] = auxiliar
+
     
+def busqueda_binaria(lista: List,num: int) -> int :
+    min = 0 
+    max = len(lista) - 1 
+
+    while min <= max : 
+        mid = (min + max) // 2 
+        if lista[mid] == num : 
+            return mid 
+        if lista[mid] < num:
+            min = mid + 1
+        else:
+            max = mid - 1
+    return -1
+
+def busqueda_secuencial(lista:List[int], num : int) -> int : 
+    posicion = 0 
+    for posicion in range (len(lista))  :
+        if lista[posicion] == num :
+            return posicion    
+    return -1 
+milista = [2,3,4,5,6]
+print(busqueda_secuencial(milista,5))
+
+def busqueda_secuencial(lista:List[int], num: int) -> int :
+    i = 0 
+    while i <= len(lista) :
+        if lista[i] == num :
+            return i 
+        i += 1 
+    return -1 
 
 
   

@@ -1,12 +1,13 @@
+from PokerCard import Type , Color
 class PokerCardConstructor:
     def __init__(self, number: int, type_: int):
         # Validación del número
-        if number <= 0 or number > 13:
+        if number == None or number <= 0 or number > 13:
             self._number = -1
         else:
             self._number = number
         # Validación del tipo (palo)
-        if type_ < 0 or type_ > 3:
+        if  type_ == None or type_ < 0 or type_ > 3:
             self._type = -1
         else:
             self._type = type_
@@ -33,3 +34,8 @@ class PokerCardConstructor:
 
     def return_card(self) -> str:
         return f"{self.get_number()} de {self.return_type(self.get_type())}"
+    
+
+
+
+    
