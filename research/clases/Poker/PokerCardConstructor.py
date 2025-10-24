@@ -21,19 +21,19 @@ class PokerCardConstructor:
     def is_value(self) -> bool:
         return self.get_number() > 0 and self.get_type() >= 0
 
-    def return_type(self, number: int) -> str:
-        if number == 0:
+    def return_type(self) -> str:
+        if self._type == 0:
             return "Trebol"
-        if number == 1:
+        if self._type == 1:
             return "Picas"
-        if number == 2:
+        if self._type == 2:
             return "Diamantes"
-        if number == 3:
+        if self._type == 3:
             return "Corazones"
         return "Desconocido"
 
     def return_card(self) -> str:
-        return f"{self.get_number()} de {self.return_type(self.get_type())}"
+        return f"{self.get_number()} de {self.return_type()}"
     
 
 

@@ -29,15 +29,16 @@ class PokerCard:
         return  self._number 
     
     def set_type(self, tipo: Type):
-        if tipo in Type:  
-            self._type = tipo
+        if tipo is None:
+            tipo = Type.Desconocido
+        self._type = tipo
 
 
     def get_type(self) -> Type :
         return self._type
 
     def is_value(self) -> bool :
-      return self.get_number() > 0 and self.get_type() >= 0
+      return self.get_number() > 0 and self.get_type() is not Type.Desconocido 
     
     def get_color(self) -> Color | None:
             if self._type in (Type.Trebol, Type.Picas):
@@ -59,7 +60,7 @@ class PokerCard:
             return "Desconocido"
 
     def return_card(self) -> str:
-      return  f"{self.get_number()} de {self.return_type(self.get_type())}"
+      return  f"{self.get_number()} de {self.return_type()}"
         
 
     
