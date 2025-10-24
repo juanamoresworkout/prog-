@@ -2,6 +2,8 @@ from PokerCard import *
 import random
 
 class Deck:
+    def _init_(self): 
+        self._baraja: list[PokerCard] = []
 
     def _init_deck(self): 
         self._baraja = []
