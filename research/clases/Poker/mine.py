@@ -7,7 +7,7 @@ carta1.set_number(15)
 carta1.set_type (Type.Corazones)
 
 carta2 = PokerCardConstructor(2,1)
-
+print(carta2)
 
 from Deck import Deck
 

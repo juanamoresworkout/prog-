@@ -7,10 +7,11 @@ class PokerCardConstructor:
         else:
             self._number = number
         # Validación del tipo (palo)
-        if  type_ == None or type_ < 0 or type_ > 3:
-            self._type = -1
+        if  type_ == None :
+            self._type = Type.Desconocido
         else:
             self._type = type_
+            
 
     def get_number(self) -> int:
         return self._number
@@ -22,13 +23,13 @@ class PokerCardConstructor:
         return self.get_number() > 0 and self.get_type() >= 0
 
     def return_type(self) -> str:
-        if self._type == 0:
+        if self._type == Type.Trebol:
             return "Trebol"
-        if self._type == 1:
+        if self._type == Type.Picas:
             return "Picas"
-        if self._type == 2:
+        if self._type == Type.Diamantes:
             return "Diamantes"
-        if self._type == 3:
+        if self._type == Type.Corazones:
             return "Corazones"
         return "Desconocido"
 

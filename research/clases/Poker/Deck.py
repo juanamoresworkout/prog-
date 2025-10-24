@@ -19,9 +19,13 @@ class Deck:
     
     def shuffle (self):
         for _ in range (100) : 
-            i = random.randint(0,len(self._baraja) -1)
-            j = random.randint(0,len(self._baraja) -1)
-            self.swap(i,j)
+
+                i = random.randint(0,len(self._baraja) -1)
+                j = random.randint(0,len(self._baraja) -1)
+                if i == j:
+                    return 
+                else:
+                    self.swap(i,j)
 
     def show_deck(self) -> list[str]:
         return [carta.return_card() for carta in self._baraja]
