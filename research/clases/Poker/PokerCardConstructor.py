@@ -57,7 +57,10 @@ class PokerCardConstructor:
     def return_card(self) -> str:
         return f"{self.get_number()} de {self.return_type()}"
     
-    
+    def clone_card(self) -> 'PokerCardConstructor' : 
+        carta = PokerCardConstructor(self._number, self._type)
+        return carta 
+        
 
 
 

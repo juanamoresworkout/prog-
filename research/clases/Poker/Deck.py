@@ -85,5 +85,13 @@ class Deck:
         for _ in range(num):
           self._baraja.pop(num)
     
+    def clone_deck(self) -> 'Deck':
+        deck2 = Deck()
+        for card in self._baraja:
+            deck2.add_card(card.clone_card()) 
+        return deck2
+
+
+
     def show_deck(self) -> list[str]:
         return [carta.return_card() for carta in self._baraja]

@@ -62,7 +62,7 @@ class PokerCard:
     def return_card(self) -> str:
       return  f"{self.get_number()} de {self.return_type()}"
         
-
+    
     
         
 
