@@ -124,7 +124,6 @@ def cambiar_posiciones (lista: List[int]) :
                 auxiliar = lista[posicion]
                 lista[posicion] = lista[segunda_posicion]
                 lista[segunda_posicion] = auxiliar
-
     
 def busqueda_binaria(lista: List,num: int) -> int :
     min = 0 

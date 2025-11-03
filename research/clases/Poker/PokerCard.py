@@ -13,7 +13,7 @@ class Type(Enum):
 
 
 class PokerCard:
-
+    
     def __init__(self):
         self._number = -1
         self._type = Type.Desconocido 
