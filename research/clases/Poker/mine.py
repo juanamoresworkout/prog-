@@ -13,9 +13,6 @@ print(carta2)
 
 
 
-
-
-
 """
 for carta in range (deck.count_baraja()) :
     c = deck.get_index_card(carta) 
