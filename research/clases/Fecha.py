@@ -58,15 +58,6 @@ class Fecha :
         if self.month in (): 
             return
 
-
-
-
-
-
-
-
-
-
     def get_day(self) -> int : 
         return self._day
 
