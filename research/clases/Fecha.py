@@ -58,10 +58,6 @@ class Fecha :
         if self.month in (): 
             return
 
-<<<<<<< Updated upstream
-=======
-
->>>>>>> Stashed changes
     def get_day(self) -> int : 
         return self._day
 
