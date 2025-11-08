@@ -193,6 +193,7 @@ def fibo (numero: int ) -> list[int] :
     while i < numero : 
         c = a + b 
         a = b 
+        
         b = c 
         lista.append(b)
         i+= 1 
