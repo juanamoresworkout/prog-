@@ -147,7 +147,7 @@ class GuerreroDelEspacio(Persona):
             parar = 0.4
         if parar > 0.9:
             parar = 0.9  
-
+        
         self._factor = 1     
         self.__ataque = ataque 
         self.__ataque_rayo = ataque_rayo

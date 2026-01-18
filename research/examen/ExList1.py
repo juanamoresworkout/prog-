@@ -7,7 +7,7 @@ class ExList(Generic[T]):
     __count: int 
     __lista: list
     
-    def __init__(self,capacidad : int):
+    def __init__(self,capacidad : int = 0):
         if capacidad <= 0 :
             raise ValueError ("Valor negativo, no valido")
         self.__lista: list[T] = [None for _ in range (capacidad)]
@@ -73,11 +73,11 @@ class ExList(Generic[T]):
             for i in range(self.__count, index, -1): 
                 self.__lista[i] = self.__lista[i - 1 ] 
             self.__lista[index] = element 
-        self.__count += 1 
+            self.__count += 1 
 
         if index == self.__count: 
             self.__lista[index] = element 
-        self.__count += 1 
+            self.__count += 1 
 
     def index_of(self,element: T ) -> int : 
         for i in range(0, self.__count):
