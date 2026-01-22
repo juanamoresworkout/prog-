@@ -14,11 +14,7 @@ class TypeObject(Enum):
     Glamour = 5 
     Troglodyte = 6
     WoodCar = 7
-    PiereCar = 8 
-
-class Driver(Enum):
-    Animal = 0
-    Human = 1 
+    PiereCar = 8  
 
 class IRace(ABC):
 
@@ -58,7 +54,7 @@ class IRace(ABC):
         pass
 
     @abstractmethod
-    def GetObjectAt(index: int) -> RaceObject:
+    def GetObjectAt(self,index: int) -> RaceObject:
         pass 
 
     @abstractmethod
@@ -92,7 +88,6 @@ class Race(IRace):
             if obj.GetObjectType() == TypeObject.Coche:
                 visit(obj)
 
-
     def VisitObstacles(self, visit: Callable[[Obstacle], None]):
         for obj in self._participantes:
             if obj.GetObjectType == TypeObject.Obstacle:
@@ -110,10 +105,12 @@ class Race(IRace):
                 self._participantes.pop(i)
 
     def GetObjectCount(self)-> int :
-        pass
+        return len(self._participantes)
 
-    def GetObjectAt(index: int) -> RaceObject:
-        pass 
+    def GetObjectAt(self,index: int) -> RaceObject:
+        for i in range(len(self._participantes)):
+            if i == index :
+                return self._participantes[i]
 
 class RaceObject:
     def __init__(self,name: str):
@@ -209,7 +206,6 @@ class Puddle(Obstacle):
                     turnos = randint(1,3)
                     coche._disable += turnos 
         
-
 class Bomb(Obstacle):
 
     def __init__(self, name: str, turnos: int):
@@ -282,7 +278,6 @@ class GlamourCar(Car):
     def GetCarType(self) -> TypeObject:
         return TypeObject.Glamour
 
-    
     def Simulate(self, race: IRace):
         if not self._disable == 0:
             self._disable -= 1 
@@ -290,7 +285,6 @@ class GlamourCar(Car):
         result = self.get_velocity()
         self._position += result 
         
-
 class TroglodyteCar(Car):
 
     def __init__(self, name, finetunning):
@@ -382,8 +376,7 @@ class PiereCar(Car):
                 self._position += self.get_velocity()
         else: 
             self._position += self.get_velocity()
-                
-                
+                            
 class Driver:
     def __init__(self):
         pass 
