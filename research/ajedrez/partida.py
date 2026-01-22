@@ -119,8 +119,6 @@ class Partida:
                 rey.incrementar_movimiento()
                 torre_elegida.incrementar_movimiento()
 
-    
-
     def listar_enroque(self, color: Color) -> list[Figura]:
         rey = None
         posibles: list[Figura] = []
@@ -175,9 +173,10 @@ class Partida:
         x_ori = figura.get_x()
         y_ori = figura.get_y()
 
-        capturada = self._tablero.get_figura_en(x_dest, y_dest)  
+        capturada = self._tablero.get_figura_en(x_dest, y_dest) 
 
         self._tablero.mover_figura(figura, x_dest, y_dest)
+        self._tablero.promocionar(figura)
         
         if self.jaque(color_mueve):
             if self.puedo_mover_el_rey(color_mueve):
@@ -237,4 +236,5 @@ class Partida:
                 if pos_rey in pieza.movimiento_posible(tablero):
                     return True
         return False
+    
         

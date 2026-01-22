@@ -13,4 +13,4 @@ class Reina(Figura):
 
     def movimiento_posible(self, tablero: "Tablero") -> List[Tuple[int, int]]:
         return self.direccion_posible([(1,1),(1,-1),(-1,1),(-1,-1),(0,1),(0,-1),(1,0),(-1,0)],tablero)
-
+    

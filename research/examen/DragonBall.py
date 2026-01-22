@@ -385,7 +385,4 @@ print(torneo.devolver_ganador())
 
 
 
-5e
-
-
 

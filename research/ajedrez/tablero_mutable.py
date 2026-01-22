@@ -26,12 +26,25 @@ class TableroMutable(Tablero):
                 figura_origen.set_y(y_dest)
                 figura_origen.incrementar_movimiento()
 
-
     def set_figura_en(self, figura: Figura, x: int, y: int) -> None:
         if self.get_figura_en(x,y)  == None :
             figura.set_x(x)
             figura.set_y(y)
             self._figuras.append(figura)
+
+    def promocionar(self, figura: Figura):
+
+        if figura.get_tipo_pieza() != TipoPieza.PEON:
+            raise ValueError("Promocion solo valida para peones")
+        
+        x = figura.get_x()
+        y = figura.get_y()
+        
+        if figura.get_color() == Color.BLANCA and figura.get_y() == 7 :
+                self.sustituir_figura(Reina(Color.BLANCA,x,y), x, y)
+        else:
+            if figura.get_color() and figura.get_y() == 0 :
+                self.sustituir_figura(Reina(Color.NEGRA,x,y), x, y)
 
 
     def sustituir_figura(self, figura: Figura, x: int, y: int) -> None:

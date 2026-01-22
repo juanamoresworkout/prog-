@@ -34,6 +34,9 @@ class Tablero:
     def get_piezas(self) -> List[Figura]:
         return deepcopy(self._figuras)
     
+   
+
+    
 
 
 
