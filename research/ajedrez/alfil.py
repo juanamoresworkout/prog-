@@ -8,7 +8,7 @@ from figura import *
 # ------------------------------
 class Alfil(Figura):
     def get_tipo_pieza(self) -> TipoPieza:
-        pass
+        return TipoPieza.ALFIL
 
     def movimiento_posible(self, tablero: "Tablero") -> List[Tuple[int, int]]:
         return self.direccion_posible([(1,1),(1,-1),(-1,1),(-1,-1)],tablero)

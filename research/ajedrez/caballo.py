@@ -7,7 +7,7 @@ from figura import *
 # --------------------------------
 class Caballo(Figura):
     def get_tipo_pieza(self) -> TipoPieza:
-        pass
+        return TipoPieza.CABALLO
 
     def movimiento_posible(self, tablero: "Tablero") -> List[Tuple[int, int]]:
         result: list[Tuple[int,int]] = []

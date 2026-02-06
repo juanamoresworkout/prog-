@@ -34,6 +34,15 @@ class Tablero:
     def get_piezas(self) -> List[Figura]:
         return deepcopy(self._figuras)
     
+    def pieza_ordenadas(self) -> List[Figura]:
+        result: list[Figura] = []
+        for i in range(0,8):
+            for j in range(0,8):
+                if self.get_figura_en(i,j) is not None:    
+                      result.append(self.get_figura_en(i,j))
+        return result
+
+    
    
 
     

@@ -25,6 +25,8 @@ class TableroMutable(Tablero):
                 figura_origen.set_x(x_dest)
                 figura_origen.set_y(y_dest)
                 figura_origen.incrementar_movimiento()
+        else:
+            raise ValueError("Movimiento inválido")
 
     def set_figura_en(self, figura: Figura, x: int, y: int) -> None:
         if self.get_figura_en(x,y)  == None :
@@ -41,10 +43,17 @@ class TableroMutable(Tablero):
         y = figura.get_y()
         
         if figura.get_color() == Color.BLANCA and figura.get_y() == 7 :
-                self.sustituir_figura(Reina(Color.BLANCA,x,y), x, y)
+                nueva = Reina(Color.BLANCA, x, y)
+                self.sustituir_figura(nueva, x, y)
+                self.set_figura_en(nueva, x, y)
         else:
-            if figura.get_color() and figura.get_y() == 0 :
-                self.sustituir_figura(Reina(Color.NEGRA,x,y), x, y)
+            if figura.get_color() == Color.NEGRA and figura.get_y() == 0 :
+                nueva = Reina(Color.NEGRA, x, y)
+                self.sustituir_figura(nueva, x, y)
+                self.set_figura_en(nueva, x, y)
+    
+    def get_lista_piezas(self) -> list[Figura]:
+        return self._figuras
 
 
     def sustituir_figura(self, figura: Figura, x: int, y: int) -> None:

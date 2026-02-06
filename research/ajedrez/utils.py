@@ -1,5 +1,4 @@
 from __future__ import annotations
-from servicio import ServicioPartida
 from figura import *
 from enums import *
 from peon import * 

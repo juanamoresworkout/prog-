@@ -35,10 +35,10 @@ class Peon(Figura):
             x = self._x + posicion[0]
             y = self._y +  posicion[1]
 
-            otra_figura = tablero.get_figura_en(x,y)
-
             if self.fuera_de_rango(x,y): 
                 continue 
+
+            otra_figura = tablero.get_figura_en(x,y)
 
             if posicion == (0, 2):
                 if tablero.get_figura_en(self._x, self._y + 1) is not None:

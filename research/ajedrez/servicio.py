@@ -117,7 +117,7 @@ class ServicioPartidaImpl(ServicioPartida):
         if jugador_negras == jugador:
             color_jugador = Color.NEGRA
 
-        partida.enrocar(tipo_enroque,color_jugador)
+        partida.enrocar(color_jugador,tipo_enroque)
         partida._movimientos.append(f"Se ha efectuado enroque del jugador:{jugador}, del tipo {tipo_enroque}")
         partida.gestion_turnos()
 
@@ -141,7 +141,6 @@ class ServicioPartidaImpl(ServicioPartida):
             if criterio(partida):
                 result.append(partida)
         return result
-
 
     def crear_partida(self, jugador_blancas: str, jugador_negras: str) -> Partida:
         id = secrets.token_hex(4)

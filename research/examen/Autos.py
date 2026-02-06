@@ -34,6 +34,10 @@ class IRace(ABC):
         pass 
 
     @abstractmethod
+    def FilterCars(self, filter:Callable[[Car],bool]) -> list[Car]:
+        pass 
+
+    @abstractmethod
     def VisitDriver(self, visit: Callable[[Driver], None]):
         pass 
 
@@ -61,27 +65,103 @@ class IRace(ABC):
     def remove_object(self,obj: RaceObject) -> RaceObject|None:
         pass 
 
+    @abstractmethod
+    def get_winner(self, distance: float) -> RaceObject|list[RaceObject]:
+        pass 
+
+
 class Race(IRace):
 
     def __init__(self):
         self._participantes: list[RaceObject] = []
 
-    def AddObject(self, obj: RaceObject, position: int):
-        pass 
-    
-    def Init(self, distance):
-        pass
+    def AddObject(self, obj: RaceObject, position: float):
+        if obj is None:
+            raise ValueError("No es valido pasar nada")     
+        if obj.GetObjectType() == TypeObject.Coche:
+            for objt in self._participantes:           
+                if objt.GetObjectType() == TypeObject.Coche and  objt.GetCarType() == obj.GetCarType():
+                        raise ValueError("Solo se permite un vehiculo")
+            self._participantes.append(obj)
+        else:
+            obj._position = position
+            self._participantes.append(obj)
+            
+    def finish_race(self,corredor: RaceObject,distance: int)-> bool:
+        if not isinstance(corredor,Car):
+            raise ValueError("Error de tipo")
+        return corredor.get_position() >= distance
+        
+    def Init(self, distance: float):
+        if distance is None:
+            raise ValueError("Distancia requerida")
+        self.generar_cuatro_corredores()
+        self.generar_tres_obstaculos(uniform(0,distance))
+        while True:
+            self.SimulateStep()
+            result: list[Car] = self.FilterCars(lambda x : self.finish_race(x,distance))
+            if len(result) > 0 :
+                return 
+    #ESTA FUNCION SOLO DEBE USARSE UNA VEZ EJECUTADO Init
+    def get_winner(self, distance: float) -> RaceObject|list[RaceObject]:
+        coches:list[Car] = Utils.orden_corredores(self)
+        result: list[Car] = self.FilterCars(lambda x : self.finish_race(x,distance))
 
+        if len(result) == 0:
+            raise ValueError("No ha llegado nadie a la meta")
+        if len(result) == 1:
+            return result[0]
+        if len(result) > 1:
+            varios_ganadores: list[Car] = []
+            #Como la lista tiene ordenadores los corredores ganadores, y el numero mas alto es
+            #el ultimo, seleccionamos ese y si hay dos en la misma posicion es que hay varios ganadores. 
+            primero = len(result) - 1 
+            for i in range(len(result)):
+                if result[i].get_position() == result[primero].get_position():
+                    varios_ganadores.append(result[i])
+                    return result 
+        
     def SimulateStep(self):
-        pass 
+        if len(self._participantes) == 0 :
+            raise ValueError("Lista vacia")
+        for obj in self._participantes:
+            obj.Simulate(self)
 
     def VisitDriver(self, visit: Callable[[Driver], None]):
         for coche in Utils.orden_corredores(self):
             corredor = coche.get_drivers()
             if corredor[0] is not None:
-                visit(corredor)
+                visit(corredor[0])
             if corredor[1] is not None:
-                visit(corredor)
+                visit(corredor[1])
+
+    def FilterCars(self, filter:Callable[[Car],bool]) -> list[Car]:
+        result: list[Car] = []
+        for obj in self._participantes:
+            if obj.GetObjectType() == TypeObject.Coche:
+                if filter(obj):
+                    result.append(obj)
+        return result 
+
+    def generar_tres_obstaculos(self, distancia: float):
+        piedra = Rock("Piedra",uniform(10.0,30.0))
+        charco = Puddle("Charco")
+        bomba = Bomb("Bomba",randint(0,10))
+        self.AddObject(piedra,uniform(0,distancia))
+        self.AddObject(charco,uniform(0,distancia))
+        self.AddObject(bomba,uniform(0,distancia))
+    
+    #Preguntar profesor, porque necesito argumentos
+    def generar_cuatro_corredores(self):
+        glamour = GlamourCar("Glamour",uniform(1.0,3.0))
+        piere = PiereCar("Piere", uniform(1.0,3.0), randint(10,20))
+        troglodyte = TroglodyteCar("Troglodyte",uniform(1.0,3.0))
+        wood = WoodCar("Wood",uniform(1.0,3.0))
+        self.AddObject(glamour,0)
+        self.AddObject(piere,0)
+        self.AddObject(troglodyte,0)
+        self.AddObject(wood,0)
+
 
     def VisitCars(self,visit: Callable[[Car],None]):
         for obj in self._participantes:
@@ -130,6 +210,15 @@ class RaceObject:
     def IsAlive(self)-> bool:
         pass 
 
+    def add_position(self, posicion: float):
+        if posicion < 0 :
+            raise ValueError("No permitido  posicion negativa")
+        self._position = posicion
+    
+    @abstractmethod
+    def GetCarType(self) -> Car:
+        pass
+
     @abstractmethod
     def GetObjectType(self) -> TypeObject:
         pass 
@@ -138,8 +227,8 @@ class RaceObject:
         self._disable += turnos 
 
     def _can_i_move(self) -> bool:
-        if self._disabled_turns > 0:
-            self._disabled_turns -= 1
+        if self._disable > 0:
+            self._disable -= 1
             return False
         return True
 
@@ -203,7 +292,7 @@ class Puddle(Obstacle):
         for coche in coches:
             if coche._position < self._position and coche._position > (self._position - 20):
                 if uniform(0.0,100.0) <= 20.0:
-                    turnos = randint(1,3)
+                    turnos = randint(0,3)
                     coche._disable += turnos 
         
 class Bomb(Obstacle):
@@ -220,7 +309,7 @@ class Bomb(Obstacle):
         if self.IsAlive():
             self._turnos -= 1 
         else:
-            coches =Utils.orden_corredores(race)
+            coches = Utils.orden_corredores(race)
             for coche in coches:
                 if coche._position < self._position and coche._position > (self._position - 70):
                     nueva_distancia = uniform(-50.0,50.0)
@@ -263,11 +352,12 @@ class Car(RaceObject):
         result = self._velocity * self._finetunning
         if self._copilot is not None:
             result += self._copilot.GetVelocityExtra()
+        
         return result 
 
 class GlamourCar(Car):
 
-    def __init__(self, name, finetunning):
+    def __init__(self, name: str, finetunning: float):
         super().__init__(name, finetunning, Human(), None)
         self._velocity = 15.0
         
@@ -279,15 +369,15 @@ class GlamourCar(Car):
         return TypeObject.Glamour
 
     def Simulate(self, race: IRace):
-        if not self._disable == 0:
-            self._disable -= 1 
-            return 
+        if not self._can_i_move():
+            return
         result = self.get_velocity()
         self._position += result 
         
+        
 class TroglodyteCar(Car):
 
-    def __init__(self, name, finetunning):
+    def __init__(self, name: str, finetunning: float):
         super().__init__(name, finetunning, Human(), Human())
         self._velocity = 10
 
@@ -311,8 +401,8 @@ class TroglodyteCar(Car):
 
 class WoodCar(Car):
 
-    def __init__(self, name, finetunning):
-        super().__init__(name, finetunning, Human(), Animal())
+    def __init__(self, name: str, finetunning: float):
+        super().__init__(name, finetunning , Human(), Animal())
         self._velocity = 15 
    
     @abstractmethod
@@ -331,12 +421,12 @@ class WoodCar(Car):
             
 class PiereCar(Car):
 
-    def __init__(self, name, finetunning, trampas: int):
+    def __init__(self, name:str, finetunning: float, trampas: int):
         super().__init__(name, finetunning, Human(), Animal())       
-        if trampa < 10:
-            trampa = 10
-        if trampa > 20:
-            trampa = 20 
+        if trampas < 10:
+            trampas = 10
+        if trampas > 20:
+            trampas = 20 
         
         self._velocity = 18 
         self.__trampas = trampas
@@ -403,7 +493,7 @@ class Human(Driver):
             
 class Utils:
         @classmethod
-        def orden_corredores(cls,race: IRace):
+        def orden_corredores(cls, race: IRace):
             coches: list[Car] = []
             race.VisitCars(lambda car : coches.append(car))
             for i in range(len(coches)):
@@ -412,3 +502,7 @@ class Utils:
                         coches[j],coches[j + 1] = coches[j+1],coches[j]
             return coches 
     
+mi_carrera = Race()
+mi_carrera.Init(500.0)
+ganador = mi_carrera.get_winner(500.0)
+print(ganador)

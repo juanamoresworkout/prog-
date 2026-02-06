@@ -1,10 +1,11 @@
 from __future__ import annotations
 
 from abc import ABC, abstractmethod
-from typing import List, Tuple 
+from typing import List, Tuple, TYPE_CHECKING 
 
-from .enums import Color, TipoPieza
-from tablero import Tablero
+from enums import Color, TipoPieza
+if TYPE_CHECKING:
+    from tablero import Tablero
 
 # ------------------
 # Clase Figura(ABC):
@@ -24,7 +25,7 @@ class Figura(ABC):
         if x < 0 or x > 7:
             raise ValueError("Fuera de rango")
 
-        if y < 0 or x > 7:
+        if y < 0 or y > 7:
             raise ValueError("Fuera de rango")
 
         self._color: Color = color

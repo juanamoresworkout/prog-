@@ -1,5 +1,6 @@
 from __future__ import annotations
 from typing import *
+from abc import * 
 
 T = TypeVar('T')
 
@@ -34,6 +35,8 @@ class ExList(Generic[T]):
             raise ValueError ("No hay objetos en la lista")
         new_list: list[T] = [self.__lista[i] for i in range(self.__count -1,-1,-1)] + [None] * [len(self.__lista) - self.__count]
 
+    lista: list[int] = []
+    lista + [None]
     def get_element_at(self,index: int ) -> T :
         if index < 0 or index > (self.__count -1) :
             return T
@@ -109,6 +112,7 @@ class ExList(Generic[T]):
             for j in range(self.__count - 1):
                 if delegate(self.__lista[j], self.__lista[j + 1]):
                     self.__lista[j], self.__lista[j + 1] = self.__lista[j + 1], self.__lista[j]
+
 
 
     
